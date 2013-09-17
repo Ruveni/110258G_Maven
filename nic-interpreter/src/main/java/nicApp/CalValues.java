@@ -22,27 +22,97 @@ public class CalValues {
     public String calValue(String nic)throws NicException{
         DateTime date = new DateTime(2012, 1, 1, 0, 0, 0);
         try {
-            year = 1900 + Integer.parseInt(nic.substring(0, 2));//Calculating year
+            setYear(1900 + Integer.parseInt(nic.substring(0, 2)));//Calculating year
             int genderVal = Integer.parseInt(nic.substring(2, 5));
             if (genderVal <= 500) {//Checking for gender
-                gender = "Male";
+                setGender("Male");
             } else {
                 genderVal = genderVal - 500;
-                gender = "Female";
+                setGender("Female");
             }
             date = date.plusDays(genderVal - 1);
-            month = date.getMonthOfYear();//Calculating the month
-            day = date.getDayOfMonth();//Calculating the day
-            int qualify = 2012 - year;
+            setMonth(date.getMonthOfYear());//Calculating the month
+            setDay(date.getDayOfMonth());//Calculating the day
+            int qualify = 2012 - getYear();
             if (qualify >= 18) {//Checking whether a voter or not
-                isVoter = true;
+                setIsVoter(true);
             } else {
-                isVoter = false;
+                setIsVoter(false);
             }
         } catch (Exception e) {
             throw new NicException("Invalid NIC Number..Recheck!!!!");
         }
-        String result="Birthday[year="+year+", month="+month+", date="+day+"] gender="+gender.toUpperCase()+" isVoter="+isVoter+"";
+        String result="Birthday[year="+getYear()+", month="+getMonth()+", date="+getDay()+"] gender="+getGender().toUpperCase()+" isVoter="+isIsVoter()+"";
         return result;//Returns the data as a string
+    }
+
+    /**
+     * @return the year
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * @param year the year to set
+     */
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    /**
+     * @return the month
+     */
+    public int getMonth() {
+        return month;
+    }
+
+    /**
+     * @param month the month to set
+     */
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    /**
+     * @return the day
+     */
+    public int getDay() {
+        return day;
+    }
+
+    /**
+     * @param day the day to set
+     */
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    /**
+     * @return the gender
+     */
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    /**
+     * @return the isVoter
+     */
+    public boolean isIsVoter() {
+        return isVoter;
+    }
+
+    /**
+     * @param isVoter the isVoter to set
+     */
+    public void setIsVoter(boolean isVoter) {
+        this.isVoter = isVoter;
     }
 }
